@@ -1,4 +1,5 @@
-﻿using ProteinLocalAlignmentCalculator.Models;
+﻿using ProteinLocalAlignmentCalculator.Engine;
+using ProteinLocalAlignmentCalculator.Models;
 
 internal class Program
 {
@@ -21,10 +22,18 @@ internal class Program
             gapExtendPenalty = int.Parse(e);
 
         //calculation
+        ProteinSequence[] sequences = [data.seq1, data.seq2];
 
+        var calculator = new LocalAlignmentCalculator(
+            sequences.First(s => s.IsX),
+            sequences.First(s => !s.IsX),
+            data.similatiryMatrix,
+            gapOpenPenalty,
+            gapExtendPenalty
+        );
+        calculator.CalculateOptimalAlignment();
 
         //output
-        ProteinSequence[] sequences = [data.seq1, data.seq2];
         Console.WriteLine(sequences.First(s => s.IsX));
         Console.WriteLine();
         Console.WriteLine(sequences.First(s => !s.IsX));
@@ -39,11 +48,11 @@ internal class Program
         Console.WriteLine($"g: {gapExtendPenalty?.ToString() ?? "-"}");
 
         Console.WriteLine();
-        Console.WriteLine($"SW score: {0}");
+        Console.WriteLine($"SW score: {calculator.Score}");
 
         Console.WriteLine();
         Console.WriteLine("Alignment:");
-        Console.WriteLine("AaaA");
+        Console.WriteLine(calculator.GetAlignmentText());
 
         Console.ReadKey();
     }

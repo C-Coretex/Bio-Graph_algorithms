@@ -3,6 +3,8 @@
     internal class ProteinSequence(string sequence)
     {
         public string Sequence { get; } = sequence;
+        public int Size => Sequence.Length;
+
         public required string Name { get; init; }
         public bool IsX => Name.Contains('X');
 
