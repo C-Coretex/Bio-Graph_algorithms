@@ -9,4 +9,22 @@
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="blosum62.mat" />
+    <None Remove="seq_x.fa" />
+    <None Remove="seq_y.fa" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="blosum62.mat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="seq_x.fa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="seq_y.fa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
