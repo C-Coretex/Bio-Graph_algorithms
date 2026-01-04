@@ -68,32 +68,11 @@ namespace ProteinLocalAlignmentCalculator.Engine
 
                     (int score, Rule rule)[] possibleMoves =
                     [
-                        (_gapYScore[i - 1, j - 1] + matchScore, Rule.GapY),
-                        (_gapXScore[i - 1, j - 1] + matchScore, Rule.GapX),
-                        (_substitutionScore[i - 1, j - 1] + matchScore, Rule.Substitution),
-                        (0, Rule.None)
-                    ];
-
-                    //Correct answer printed, algorithm modified
-                    /*
-                    (int score, Rule rule)[] possibleMoves =
-                    [
                         (_substitutionScore[i - 1, j - 1] + matchScore, Rule.Substitution),
                         (_gapYScore[i, j], Rule.GapY),
                         (_gapXScore[i, j], Rule.GapX),
                         (0, Rule.None)
                     ];
-                    */
-                    //Incorrect answer, algorithm modified (we just show gaps first if there are multiple variants)
-                    /*
-                    (int score, Rule rule)[] possibleMoves =
-                    [
-                        (_gapYScore[i, j], Rule.GapY),
-                        (_gapXScore[i, j], Rule.GapX),
-                        (_substitutionScore[i - 1, j - 1] + matchScore, Rule.Substitution),
-                        (0, Rule.None)
-                    ];
-                    */
 
                     var maxMove = possibleMoves.Max(p => p.score);
                     _substitutionScore[i, j] = maxMove;
@@ -176,32 +155,6 @@ namespace ProteinLocalAlignmentCalculator.Engine
                                 _ => sbStep.Append(' ')
                             };
                         }
-
-                        var newScore = _similarityMatrix.GetScore('D', 'L');
-                        //newScore += -2;
-                        //newScore += -1;
-                        //newScore += -1;
-                        //newScore += -1;
-                        //newScore += -1;
-                        //newScore += -1;
-                        newScore += _similarityMatrix.GetScore('G', 'A');
-                        newScore += _similarityMatrix.GetScore('D', 'R');
-                        newScore += _similarityMatrix.GetScore('G', 'N');
-                        newScore += _similarityMatrix.GetScore('D', 'D');
-                        newScore += _similarityMatrix.GetScore('G', 'R');
-                        newScore += _similarityMatrix.GetScore('D', 'V');
-                        //newScore += -2;
-                        //newScore += -2;
-                        newScore += _similarityMatrix.GetScore('R', 'V');
-                        newScore += _similarityMatrix.GetScore('N', 'A');
-                        newScore += _similarityMatrix.GetScore('D', 'R');
-                        newScore += _similarityMatrix.GetScore('K', 'N');
-                        newScore += _similarityMatrix.GetScore('I', 'D');
-                        newScore += _similarityMatrix.GetScore('L', 'W');
-                        newScore += _similarityMatrix.GetScore('I', 'W');
-                        newScore += _similarityMatrix.GetScore('A', 'W');
-                        newScore += _similarityMatrix.GetScore('R', 'W');
-                        newScore += _similarityMatrix.GetScore('N', 'W');
 
                         return sbX.ToString() + Environment.NewLine +
                                sbY.ToString() + Environment.NewLine +

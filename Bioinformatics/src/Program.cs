@@ -34,27 +34,30 @@ internal class Program
         calculator.CalculateOptimalAlignment();
 
         //output
-        Console.WriteLine(sequences.First(s => s.IsX));
-        Console.WriteLine();
-        Console.WriteLine(sequences.First(s => !s.IsX));
+        using var fileStream = new FileStream("./output.txt", FileMode.Create, FileAccess.Write);
+        using var writer = new StreamWriter(fileStream);
 
-        Console.WriteLine();
-        Console.WriteLine("Similarity matrix:");
-        Console.WriteLine(data.similatiryMatrix.FileName);
+        writer.WriteLine(sequences.First(s => s.IsX));
+        writer.WriteLine();
+        writer.WriteLine(sequences.First(s => !s.IsX));
 
-        Console.WriteLine();
-        Console.WriteLine("Gap penalties:");
-        Console.WriteLine($"h: {gapOpenPenalty?.ToString() ?? "-"}");
-        Console.WriteLine($"g: {gapExtendPenalty?.ToString() ?? "-"}");
+        writer.WriteLine();
+        writer.WriteLine("Similarity matrix:");
+        writer.WriteLine(data.similatiryMatrix.FileName);
 
-        Console.WriteLine();
-        Console.WriteLine($"SW score: {calculator.Score}");
+        writer.WriteLine();
+        writer.WriteLine("Gap penalties:");
+        writer.WriteLine($"h: {gapOpenPenalty?.ToString() ?? "-"}");
+        writer.WriteLine($"g: {gapExtendPenalty?.ToString() ?? "-"}");
 
-        Console.WriteLine();
-        Console.WriteLine("Alignment:");
-        Console.WriteLine(calculator.GetAlignmentText());
+        writer.WriteLine();
+        writer.WriteLine($"SW score: {calculator.Score}");
 
-        Console.ReadKey();
+        writer.WriteLine();
+        writer.WriteLine("Alignment:");
+        writer.WriteLine(calculator.GetAlignmentText());
+
+        Console.WriteLine("Optimal Local Alignment calculation completed.");
     }
 
     private static (ProteinSequence seq1, ProteinSequence seq2, SimilarityMatrix similatiryMatrix) LoadInputFiles()

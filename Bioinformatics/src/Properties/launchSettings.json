@@ -1,7 +1,8 @@
 {
   "profiles": {
     "ProteinLocalAlignmentCalculator": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "1 1"
     }
   }
 }
