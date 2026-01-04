@@ -99,7 +99,6 @@ namespace ProteinLocalAlignmentCalculator.Engine
                         var y = j;
                         while (_ruleMatrix[x, y]?.All(x => x != Rule.None) == true)
                         {
-                            var ttt = _ruleMatrix[x, y];
                             var rule = _ruleMatrix[x, y].First();
                             steps.Insert(0, rule);
                             switch (rule)
