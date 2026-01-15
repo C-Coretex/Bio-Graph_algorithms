@@ -15,7 +15,7 @@
 
         public static ProteinSequence FromFasta(string fastaContent)
         {
-            var lines = fastaContent.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            var lines = fastaContent.Split(["\r\n", "\n", "\r"], StringSplitOptions.RemoveEmptyEntries);
             if (lines.Length < 2)
                 throw new ArgumentException("Invalid FASTA content.");
 
